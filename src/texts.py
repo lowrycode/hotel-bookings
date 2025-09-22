@@ -1,4 +1,4 @@
-BUSINNESS_REQUIREMENT_1 = """
+BUSINESS_REQUIREMENT_1 = """
 ##### **Business Requirement 1:**
 The client wants to know the following **insights** from the data:
 - a. Which **variables** are most associated with cancellations?
@@ -13,7 +13,7 @@ They also want to know whether cancellation patterns are **significantly
 different in the two hotels**.
 """
 
-BUSINNESS_REQUIREMENT_2 = """
+BUSINESS_REQUIREMENT_2 = """
 ##### **Business Requirement 2:**
 The client wants to know whether the data supports the following
 **hypotheses**:
@@ -25,7 +25,7 @@ reserved room types are more likely to lead to cancellations.
 to cancel closer to the arrival date than other customer types.
 """
 
-BUSINNESS_REQUIREMENT_3 = """
+BUSINESS_REQUIREMENT_3 = """
 ##### **Business Requirement 3:**
 The client is interested in determining whether or not a particular
 booking will be cancelled.

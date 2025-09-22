@@ -40,9 +40,9 @@ def page_summary_body():
     # Business Requirements
     st.write("### Business Requirements")
     st.write("There are 3 different business requirements.")
-    st.success(texts.BUSINNESS_REQUIREMENT_1)
-    st.warning(texts.BUSINNESS_REQUIREMENT_2)
-    st.error(texts.BUSINNESS_REQUIREMENT_3)
+    st.success(texts.BUSINESS_REQUIREMENT_1)
+    st.warning(texts.BUSINESS_REQUIREMENT_2)
+    st.error(texts.BUSINESS_REQUIREMENT_3)
 
     st.caption(
         """
