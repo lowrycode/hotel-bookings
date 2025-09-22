@@ -1,0 +1,11 @@
+,Spearman correlation with is_canceled
+lead_time,0.23217963649665205
+market_segment_Online TA,0.204756653128178
+required_car_parking_spaces,-0.18113334508026732
+deposit_type_Non Refund,0.1664054497092067
+deposit_type_No Deposit,-0.16478795548968672
+adr,0.15283780982586223
+market_segment_Offline TA/TO,-0.13867101365571624
+distribution_channel_TA/TO,0.1380506191814336
+total_of_special_requests,-0.13742199344215403
+customer_type_Transient,0.1335911892196304
