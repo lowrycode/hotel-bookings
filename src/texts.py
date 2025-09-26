@@ -27,9 +27,9 @@ to cancel closer to the arrival date than other customer types.
 
 BUSINESS_REQUIREMENT_3 = """
 ##### **Business Requirement 3:**
-The client is interested in determining whether or not a particular
-booking will be cancelled.
-- **Goal:** Flag bookings that will actually cancel so the hotel can
+The client is interested in determining **whether or not a particular
+booking will be cancelled** and the **probability of cancellation**.
+- **Goal:** Flag bookings that will cancel so the hotel can
 take proactive action (e.g. overbook, send retention offers, adjust
 staffing).
 - **Constraint:** The hotel does not want to take action on bookings
@@ -42,4 +42,11 @@ to empty rooms and lost revenue.*
 - At least **60% Precision on 'Cancel'** (on train and test set)
   - *A high precision is important because false alarms lead to
 wasted or harmful interventions.*
+"""
+
+METRIC_DEFINITIONS = """
+- **Recall on 'Cancel':** Of all the bookings that actually
+cancelled, how many were caught?
+- **Precision on 'Cancel':** Of all the bookings we predicted as
+cancelled, how many really cancelled?
 """
