@@ -1,24 +1,23 @@
 import streamlit as st
 import pandas as pd
+import joblib
 
 # Define the version used (so use files from the correct outputs directory)
-VERSION = 'v1'
+VERSION = "v1"
 
 
 # Functions for loading data
 @st.cache_data
 def load_deduplicated_data(version=VERSION):
     df = pd.read_csv(
-        f"outputs/{version}/datasets/cleaned/cleaned_deduplicated.csv"
-    )
+        f"outputs/{version}/datasets/cleaned/cleaned_deduplicated.csv")
     return df
 
 
 @st.cache_data
 def load_all_data(version=VERSION):
     df = pd.read_csv(
-        f"outputs/{version}/datasets/cleaned/cleaned_all_records.csv"
-    )
+        f"outputs/{version}/datasets/cleaned/cleaned_all_records.csv")
     return df
 
 
@@ -26,24 +25,19 @@ def load_all_data(version=VERSION):
 def load_correlation_matrix(version=VERSION):
     df = pd.read_csv(
         f"outputs/{version}/datasets/cleaned/correlation_matrix.csv",
-        index_col=0
-    )
+        index_col=0)
     return df
 
 
 @st.cache_data
 def load_room_data(version=VERSION):
-    df = pd.read_csv(
-        f"outputs/{version}/datasets/cleaned/rooms.csv"
-    )
+    df = pd.read_csv(f"outputs/{version}/datasets/cleaned/rooms.csv")
     return df
 
 
 @st.cache_data
 def load_lead_time_data(version=VERSION):
-    df = pd.read_csv(
-        f"outputs/{version}/datasets/cleaned/lead_times.csv"
-    )
+    df = pd.read_csv(f"outputs/{version}/datasets/cleaned/lead_times.csv")
     return df
 
 
@@ -64,6 +58,12 @@ def load_image(filename, version=VERSION):
     st.image(filepath)
 
 
+# Function for loading pipelines
+def load_ml_pipeline(filename, version=VERSION):
+    filepath = f"outputs/{version}/ml_pipelines/{filename}"
+    return joblib.load(filename=filepath)
+
+
 # Helper functions
 def get_percentage_cancelled(df, feature, target, min_total_bookings=0):
     """
@@ -76,22 +76,26 @@ def get_percentage_cancelled(df, feature, target, min_total_bookings=0):
     """
 
     # Get counts
-    counts = df.groupby([feature, target], observed=False).size().reset_index(name='count')
-    counts = counts.pivot(index=feature, columns=target, values='count').fillna(0)
+    counts = (
+        df.groupby([feature, target], observed=False)
+        .size().reset_index(name="count"))
+    counts = (
+        counts.pivot(index=feature, columns=target, values="count").fillna(0))
     counts.columns.name = None
 
     # Add total bookings and % cancelled
     summary = counts.copy()
-    summary['Total Bookings'] = summary.sum(axis=1).astype('int')
-    summary['% Cancelled'] = round(summary[True] / summary['Total Bookings'] * 100,1)
+    summary["Total Bookings"] = summary.sum(axis=1).astype("int")
+    summary["% Cancelled"] = round(
+        summary[True] / summary["Total Bookings"] * 100, 1)
 
     # Filter for relevant columns
-    summary = summary[['Total Bookings', '% Cancelled']]
+    summary = summary[["Total Bookings", "% Cancelled"]]
 
     # Filter out countries with total bookings below a threshold
-    condition = summary['Total Bookings'] >= min_total_bookings
+    condition = summary["Total Bookings"] >= min_total_bookings
     summary = summary[condition]
 
     # Sort and display
-    summary.sort_values('% Cancelled', ascending=False, inplace=True)
+    summary.sort_values("% Cancelled", ascending=False, inplace=True)
     return summary
