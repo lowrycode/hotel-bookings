@@ -43,12 +43,4 @@ def page_summary_body():
     st.success(texts.BUSINESS_REQUIREMENT_1)
     st.warning(texts.BUSINESS_REQUIREMENT_2)
     st.error(texts.BUSINESS_REQUIREMENT_3)
-
-    st.caption(
-        """
-        - **Recall on 'Cancel':** Of all the bookings that actually
-        cancelled, how many were caught?
-        - **Precision on 'Cancel':** Of all the bookings we predicted as
-        cancelled, how many really cancelled?
-        """
-    )
+    st.caption(texts.METRIC_DEFINITIONS)
