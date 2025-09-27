@@ -46,6 +46,26 @@ def load_room_data(version=VERSION):
     return load_cleaned_data('rooms.csv', version)
 
 
+@st.cache_data
+def load_X_train_data(version=VERSION):
+    return load_cleaned_data('X_train.csv', version)
+
+
+@st.cache_data
+def load_y_train_data(version=VERSION):
+    return load_cleaned_data('y_train.csv', version)
+
+
+@st.cache_data
+def load_X_test_data(version=VERSION):
+    return load_cleaned_data('X_test.csv', version)
+
+
+@st.cache_data
+def load_y_test_data(version=VERSION):
+    return load_cleaned_data('y_test.csv', version)
+
+
 # Helper function for loading cleaned datasets
 @st.cache_data
 def load_cleaned_data(filename, version):
