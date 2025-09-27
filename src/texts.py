@@ -9,6 +9,7 @@ percentage cancellations?
 - d. What is the extent of **room type reassignments** and how are these
 associated with booking cancellations?
 - e. **How far in advance** are bookings typically cancelled?
+
 They also want to know whether cancellation patterns are **significantly
 different in the two hotels**.
 """
