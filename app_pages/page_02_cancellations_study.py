@@ -34,22 +34,20 @@ def page_cancellations_study_body():
         st.write("***Jump to...***")
         st.write(
             """
-            - [About the Dataset](#about-the-dataset)
-            - [1a. Which variables are most associated with cancellations?](
+            - [a. Which variables are most associated with cancellations?](
             #correlation-analysis)
-            - [1b. Which countries make the most bookings, cancellations and
+            - [b. Which countries make the most bookings, cancellations and
             percentage cancellations?](#country-analysis)
-            - [1c. Which travel agents make the most bookings, cancellations
+            - [c. Which travel agents make the most bookings, cancellations
             and percentage cancellations?](#travel-agent-analysis)
-            - [1d. What is the extent of room type reassignments and how are
+            - [d. What is the extent of room type reassignments and how are
             these associated with booking cancellations?](#room-analysis)
-            - [1e. How far in advance are bookings typically cancelled?](
+            - [e. How far in advance are bookings typically cancelled?](
             #cancellation-lead-time-analysis)
             """
         )
 
     # Sections addressing each business objective
-    section_about_the_dataset(df)
     section_correlation_study(corr_matrix)
     section_countries(df, df_all)
     section_travel_agents(df, df_all)
@@ -58,52 +56,11 @@ def page_cancellations_study_body():
 
 
 # Page Sections
-def section_about_the_dataset(df):
-    # --- About the Dataset ---
-    st.html('<a name="about-the-dataset"></a>')
-    st.divider()
-    st.write("### About the Dataset")
-    st.write(
-        """
-        The dataset contains **32 variables** with
-        **79,330 observations of the city hotel** and
-        **40,060 observations of the resort hotel**.
-        Each observation represents a hotel booking.
-
-        Many **duplicated records** exist (due to group and bulk bookings).
-        To avoid skewing the data towards these larger bookings, many
-        aspects of the analysis were based on a **cleaned version** of
-        the data where **duplicate records** were **aggregated** and
-        **counted**.
-        """
-    )
-
-    # Inspect Data
-    with st.expander("Inspect the deduplicated dataset"):
-        st.write(
-            f"""
-            The deduplicated dataset contains **{df.shape[0]:,} individual
-            records** and has **{df.shape[1]} variables**. The two
-            additional variables are found in the far right columns:
-            - **`record_count`**: shows the aggregate count for each record
-            - **`is_duplicate`:** distinguishes duplicated records from
-            truly unique records
-            """
-        )
-        st.write(
-            """
-            The first 5 records in the deduplicated dataset (in descending
-            "order by `record_count`) are shown below:
-            """
-        )
-        st.write(df.head(5))
-
-
 def section_correlation_study(corr_matrix):
     st.html('<a name="correlation-analysis"></a>')
     st.divider()
     st.write(
-        "### 1a. Which variables are most associated with cancellations?"
+        "### a. Which variables are most associated with cancellations?"
     )
 
     # Overview
@@ -222,7 +179,7 @@ def section_countries(df_deduplicated, df_all):
     st.html('<a name="country-analysis"></a>')
     st.divider()
     st.write(
-        "### 1b. Which countries make the most bookings, cancellations "
+        "### b. Which countries make the most bookings, cancellations "
         "and percentage cancellations?"
     )
 
@@ -385,7 +342,7 @@ def section_travel_agents(df_deduplicated, df_all):
     st.html('<a name="travel-agent-analysis"></a>')
     st.divider()
     st.write(
-        "### 1c. Which travel agents make the most bookings, cancellations "
+        "### c. Which travel agents make the most bookings, cancellations "
         "and percentage cancellations?"
     )
 
@@ -564,7 +521,7 @@ def section_rooms(df_room):
     st.html('<a name="room-analysis"></a>')
     st.divider()
     st.write(
-        "### 1d. What is the extent of room type reassignments and how "
+        "### d. What is the extent of room type reassignments and how "
         "are these associated with booking cancellations?"
     )
 
@@ -713,7 +670,7 @@ def section_cancellation_lead_times(df_lead):
     st.html('<a name="cancellation-lead-time-analysis"></a>')
     st.divider()
     st.write(
-        "### 1e. How far in advance are bookings typically cancelled?"
+        "### e. How far in advance are bookings typically cancelled?"
     )
 
     # - Lead Times -
