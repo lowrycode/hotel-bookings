@@ -8,17 +8,13 @@ VERSION = "v1"
 
 # Functions for loading data
 @st.cache_data
-def load_deduplicated_data(version=VERSION):
-    df = pd.read_csv(
-        f"outputs/{version}/datasets/cleaned/cleaned_deduplicated.csv")
-    return df
+def load_all_data(version=VERSION):
+    return load_cleaned_data('cleaned_all_records.csv', version)
 
 
 @st.cache_data
-def load_all_data(version=VERSION):
-    df = pd.read_csv(
-        f"outputs/{version}/datasets/cleaned/cleaned_all_records.csv")
-    return df
+def load_deduplicated_data(version=VERSION):
+    return load_cleaned_data('cleaned_deduplicated.csv', version)
 
 
 @st.cache_data
@@ -30,25 +26,30 @@ def load_correlation_matrix(version=VERSION):
 
 
 @st.cache_data
-def load_room_data(version=VERSION):
-    df = pd.read_csv(f"outputs/{version}/datasets/cleaned/rooms.csv")
-    return df
+def load_cleaned_features_data(version=VERSION):
+    return load_cleaned_data('cleaned_features.csv', version)
 
 
 @st.cache_data
 def load_lead_time_data(version=VERSION):
-    df = pd.read_csv(f"outputs/{version}/datasets/cleaned/lead_times.csv")
-    return df
+    return load_cleaned_data('lead_times.csv', version)
 
 
 @st.cache_data
 def load_percentage_cancellations_by_country_data(version=VERSION):
-    df = pd.read_csv(
-        (
-            f"outputs/{version}/datasets/cleaned/"
-            "percentage_cancellations_by_country_deduplicated.csv"
-        )
-    )
+    return load_cleaned_data(
+        'percentage_cancellations_by_country_deduplicated.csv', version)
+
+
+@st.cache_data
+def load_room_data(version=VERSION):
+    return load_cleaned_data('rooms.csv', version)
+
+
+# Helper function for loading cleaned datasets
+@st.cache_data
+def load_cleaned_data(filename, version):
+    df = pd.read_csv(f"outputs/{version}/datasets/cleaned/{filename}")
     return df
 
 

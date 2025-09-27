@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from src import texts
-from src.data_management import load_ml_pipeline, load_deduplicated_data
+from src.data_management import load_ml_pipeline, load_cleaned_features_data
 from src.machine_learning.predictive_analysis_ui import predict_cancellation
 
 
@@ -21,11 +21,32 @@ def page_predict_cancellations_body():
 
     # Instructions
     st.divider()
-    # st.write("##### INSTRUCTIONS:")
+    st.write(
+        """
+        ##### INSTRUCTIONS
+        To **make a prediction**, enter the details below and press the
+        **Run Predictive Analysis** button.
+        """
+    )
     st.info(
         """
-        *To **make a prediction**, enter the details below and press the
-        **Run Predictive Analysis** button.*
+        ***Additional Guidance***
+        - ***adr:*** Average daily rate.
+        - ***agent:*** The ID of the travel agent.
+        - ***arrival_date_week_number:*** Week number of year for arrival
+        date.
+          - *Week 1 is defined as the week containing the first Thursday in
+          January.*
+        - ***booking_changes:*** The number of changes requested for the
+        reservation before the arrival date.
+          - *If making a prediction at the time of booking, use a value of
+          **0**.*
+        - ***lead_time:*** The number of days before the arrival date that the
+        booking was made.
+        - ***record_count:*** The number of identical reservations in the same
+        transaction/booking.
+          - *Use 1 for an individual booking or a number greater than one for
+          group or bulk bookings.*
         """
     )
 
@@ -44,7 +65,7 @@ def DrawInputsWidgets():
     and returns a dataframe including these values.
     """
     # load dataset
-    df = load_deduplicated_data()
+    df = load_cleaned_features_data()
 
     # Create input widgets for 12 features
     col1, col2, col3 = st.columns(3)
@@ -58,7 +79,13 @@ def DrawInputsWidgets():
     # Draw widgets for each feature in original_best_features (from notebook 6)
     with col1:
         feature = "country"
-        st_widget = st.selectbox(label=feature, options=df[feature].unique())
+        options = sorted(df[feature].unique())
+        mode_val = df[feature].mode()[0]
+        st_widget = st.selectbox(
+            label=feature,
+            options=options,
+            index=options.index(mode_val)
+        )
     X_live[feature] = st_widget
 
     with col2:
@@ -83,7 +110,21 @@ def DrawInputsWidgets():
 
     with col4:
         feature = "agent"
-        st_widget = st.selectbox(label=feature, options=df[feature].unique())
+
+        # Sort with 'None / Unknown' first, then numeric order
+        def sort_key(x):
+            if x == 'None / Unknown':
+                return -1  # ensure this comes first
+            try:
+                return int(x)  # sort numerically
+            except ValueError:
+                return float('inf')  # any non-numeric strings at the end
+
+        options = sorted(df[feature].unique(), key=sort_key)
+        st_widget = st.selectbox(
+            label=feature,
+            options=options,
+        )
     X_live[feature] = st_widget
 
     with col5:
@@ -95,7 +136,13 @@ def DrawInputsWidgets():
 
     with col6:
         feature = "customer_type"
-        st_widget = st.selectbox(label=feature, options=df[feature].unique())
+        options = sorted(df[feature].unique())
+        mode_val = df[feature].mode()[0]
+        st_widget = st.selectbox(
+            label=feature,
+            options=options,
+            index=options.index(mode_val)
+        )
     X_live[feature] = st_widget
 
     with col7:
