@@ -69,6 +69,7 @@ def page_ml_pipeline_body():
         following decisions were made:
         """
     )
+    st.write("")
     st.write(
         """
         ###### **Features to drop:**
@@ -86,6 +87,7 @@ def page_ml_pipeline_body():
         first entered into the PMS.
         """
     )
+    st.write("")
     st.write(
         """
         ###### **Features to Keep:**
@@ -100,6 +102,7 @@ def page_ml_pipeline_body():
     )
 
     # - Pipelines -
+    st.divider()
     st.write("### Pipelines")
     st.write("There are 2 ML Pipelines arranged in series.")
 
@@ -119,13 +122,6 @@ def page_ml_pipeline_body():
         """
     )
     st.write(cleaned_features.columns.to_list())
-    st.info(
-        """
-        
-        
-        """
-    )
-
 
     st.write(
         """
@@ -133,15 +129,15 @@ def page_ml_pipeline_body():
         pipeline), the following **transformed features** were used for
         training the classification model:
         """
-    )    
+    )
     st.write(X_train.columns.to_list())
 
     st.write(
         """
         The plot below shows the 12 most important transformed features:
         """
-    )    
-    load_image('feature_importance.png')
+    )
+    load_image("feature_importance.png")
 
     # - Pipeline Performance -
     st.divider()
@@ -172,9 +168,7 @@ def page_ml_pipeline_body():
             X_test=X_test,
             y_test=y_test,
             pipeline=pipeline_clf,
-            label_map=['No Cancel', 'Cancel'],
-            target_class='Cancel',
-            summary_only=False
+            label_map=["No Cancel", "Cancel"],
+            target_class="Cancel",
+            summary_only=False,
         )
-
-
