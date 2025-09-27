@@ -20,36 +20,39 @@ def page_predict_cancellations_body():
         st.caption(texts.METRIC_DEFINITIONS)
 
     # Instructions
-    st.divider()
-    st.write(
-        """
-        ##### INSTRUCTIONS
-        To **make a prediction**, enter the details below and press the
-        **Run Predictive Analysis** button.
-        """
-    )
-    st.info(
-        """
-        ***Additional Guidance***
-        - ***adr:*** Average daily rate.
-        - ***agent:*** The ID of the travel agent.
-        - ***arrival_date_week_number:*** Week number of year for arrival
-        date.
-          - *Week 1 is defined as the week containing the first Thursday in
-          January.*
-        - ***booking_changes:*** The number of changes requested for the
-        reservation before the arrival date.
-          - *If making a prediction at the time of booking, use a value of
-          **0**.*
-        - ***lead_time:*** The number of days before the arrival date that the
-        booking was made.
-        - ***record_count:*** The number of identical reservations in the same
-        transaction/booking.
-          - *Use 1 for an individual booking or a number greater than one for
-          group or bulk bookings.*
-        """
-    )
+    if st.checkbox("Show Instructions"):
+        st.write(
+            """
+            ##### Instructions
+            To **make a prediction**, enter the details below and press the
+            **Run Predictive Analysis** button.
+            """
+        )
+        st.info(
+            """
+            ***Additional Guidance***
+            - ***adr:*** Average daily rate.
+            - ***agent:*** The ID of the travel agent.
+            - ***arrival_date_week_number:*** Week number of year for arrival
+            date.
+            - *Week 1 is defined as the week containing the first Thursday in
+            January.*
+            - ***booking_changes:*** The number of changes requested for the
+            reservation before the arrival date.
+            - *If making a prediction at the time of booking, use a value of
+            **0**.*
+            - ***lead_time:*** The number of days before the arrival date that the
+            booking was made.
+            - ***record_count:*** The number of identical reservations in the same
+            transaction/booking.
+            - *Use 1 for an individual booking or a number greater than one for
+            group or bulk bookings.*
+            """
+        )
 
+    st.divider()
+    st.write("### Make a Prediction")
+    
     # Get live data from input panel
     X_live = DrawInputsWidgets()
 
