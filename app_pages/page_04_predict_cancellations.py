@@ -41,10 +41,10 @@ def page_predict_cancellations_body():
             reservation before the arrival date.
             - *If making a prediction at the time of booking, use a value of
             **0**.*
-            - ***lead_time:*** The number of days before the arrival date that the
-            booking was made.
-            - ***record_count:*** The number of identical reservations in the same
-            transaction/booking.
+            - ***lead_time:*** The number of days before the arrival date that
+            the booking was made.
+            - ***record_count:*** The number of identical reservations in the
+            same transaction/booking.
             - *Use 1 for an individual booking or a number greater than one for
             group or bulk bookings.*
             """
@@ -52,7 +52,7 @@ def page_predict_cancellations_body():
 
     st.divider()
     st.write("### Make a Prediction")
-    
+
     # Get live data from input panel
     X_live = DrawInputsWidgets()
 
