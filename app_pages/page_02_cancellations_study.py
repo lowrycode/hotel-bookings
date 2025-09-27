@@ -1015,7 +1015,12 @@ def plot_room_parallel_categegories(df, dimensions, colour_by, title):
             'yanchor': 'top'
         },
         margin=dict(l=50, r=50, t=80, b=50),
-        coloraxis_showscale=False
+        coloraxis_showscale=False,
+        font=dict(
+            family="Arial",
+            size=12,
+            color="black"
+        )
     )
 
     # Render in streamlit
