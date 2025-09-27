@@ -25,6 +25,9 @@ def page_summary_body():
         calculated as total revenue divided by nights stayed.
         - **No-show:** A guest who booked but did not arrive and didn't
         cancel.
+        - **Property Management System (PMS):** The software used
+        by hotels to manage reservations, guest services, billing and daily
+        operations.
         """
     )
 
