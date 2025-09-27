@@ -83,6 +83,12 @@ def DrawInputsWidgets():
     with col1:
         feature = "country"
         options = sorted(df[feature].unique())
+
+        # Move "None / Unknown" to top of list
+        if "None / Unknown" in options:
+            options.remove("None / Unknown")
+            options = ["None / Unknown"] + options
+
         mode_val = df[feature].mode()[0]
         st_widget = st.selectbox(
             label=feature,
