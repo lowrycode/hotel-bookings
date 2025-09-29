@@ -162,7 +162,7 @@ def section_hypothesis_1(df_country):
     st.write(
         """
         There is **not a linear relationship** between **distance
-        from Portugal** and **cancellations rates** but Portugal ranks as the
+        from Portugal** and **cancellation rates** but Portugal ranks as the
         country with the **highest percentage of cancellations** when **all
         duplicated bookings** are counted.
         """
