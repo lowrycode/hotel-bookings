@@ -321,8 +321,8 @@ def section_countries(df_deduplicated, df_all):
     st.write("#### Percentage Cancellations:\n")
     st.write(
         """
-        In this analysis, only countries with a **minimum of 100 total
-        bookings** were considered to avoid skewing the data.
+        *In this analysis, only countries with a **minimum of 100 total
+        bookings** were considered to avoid skewing the data.*
         """
     )
     st.write(
@@ -336,6 +336,57 @@ def section_countries(df_deduplicated, df_all):
     )
     with st.expander("Show graphs"):
         load_image("top_countries_by_percentage_cancellations.png")
+    st.write(
+        """
+        When comparing **each hotel**, **significant differences** are seen
+        in the **order of the countries** and the **percentages of cancelled
+        bookings**. Countries listed with the highest cancellation rates in
+        one hotel are often not listed for the other hotel. Percentage
+        cancellations tend to be **higher for the city hotel** than the
+        resort hotel.
+        """
+    )
+
+    with st.expander("Show analysis by hotel"):
+        st.write("##### Analysis by Hotel")
+
+        # Duplicates counted once
+        st.write(
+            """
+            The bar charts below show the countries with the **highest
+            percentage of cancellations** for each hotel when **duplicates are
+            counted once**.
+            """
+        )
+        load_image("top_countries_for_percentage_cancellations_by_hotel_deduplicated.png")
+
+        # All duplicates counted
+        st.write(
+            """
+            These bar charts show the countries with the **highest percentage
+            of cancellations** for each hotel when **all duplicates are
+            counted**.
+            """
+        )
+        load_image("top_countries_for_percentage_cancellations_by_hotel_all.png")
+
+        # Summary
+        st.write("##### Summary")
+        st.write(
+            """
+            For the **resort hotel**, **Portugal** is the country with the
+            **highest percentage cancellations**, both when duplicates are
+            counted once and when every duplicate reservation is counted.
+
+            For the **city hotel**, **Portugal** is **lower down the list**
+            when **duplicate bookings are counted once**, with nine other
+            countries having higher percentage cancellations. When **all
+            duplicates are counted**, **Portugal** shows the **highest
+            percentage cancellations**, presumably due to the greater
+            number of **group bookings and bulk reservations** that are
+            made and then later cancelled.
+            """
+        )
 
 
 def section_travel_agents(df_deduplicated, df_all):
@@ -493,10 +544,11 @@ def section_travel_agents(df_deduplicated, df_all):
     st.write("#### Percentage Cancellations:\n")
     st.write(
         """
-        In this analysis, only agents with a **minimum of 500 total bookings**
-        were considered to avoid skewing the data.
+        *In this analysis, only agents with a **minimum of 500 total bookings**
+        were considered to avoid skewing the data.*
         """
     )
+
     st.write(
         """
         When **duplicate bookings** are **counted once**, the 3 agents with
@@ -515,6 +567,34 @@ def section_travel_agents(df_deduplicated, df_all):
     )
     with st.expander("Show graphs"):
         load_image("top_agents_by_percentage_cancellations.png")
+
+    st.write(
+        """
+        When **comparing the two hotels**, the agents with the highest
+        cancellation rates were **largely different**. In the **deduplicated
+        dataset**, only **Agent 6** appeared in the **top lists for both
+        hotels**, whereas when **all duplicates** are considered,
+        **no agent appeared in both**. This suggests that agents may be more
+        **closely tied to specific hotels** or that they **serve distinct
+        client groups** with **different booking behaviours**.
+        """
+    )
+    with st.expander("Show analysis by hotel"):
+        st.write(
+            """
+            When considering the **deduplicated dataset**, only **Agent 6**
+            appeared in the **top lists for both hotels**.
+            """
+        )
+        load_image("top_agents_for_percentage_cancellations_by_hotel_deduplicated.png")
+
+        st.write(
+            """
+            When considering **all deduplicates**, **no agents** appeared in
+            the **top lists for both hotels**.
+            """
+        )
+        load_image("top_agents_for_percentage_cancellations_by_hotel_all.png")
 
 
 def section_rooms(df_room):
